@@ -1,0 +1,2 @@
+gcp_project = "dev-playground-1019"
+is_auth_kubectl = "true"
