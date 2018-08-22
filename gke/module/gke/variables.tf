@@ -8,7 +8,7 @@ variable "master_user"        { default = "admin" }
 variable "password"           {}
 variable "initial_node_count" { default = 3 }
 
-variable "is_auth_kubectl" {
+variable "auto_register_kubeconfig" {
   description = "execute gcloud container clusters get-credentials command after cluster created."
   default     = "false"
 }

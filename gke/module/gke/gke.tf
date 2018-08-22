@@ -27,7 +27,7 @@ resource "google_container_cluster" "gke" {
   }
 
   provisioner "local-exec" {
-    command = "${var.is_auth_kubectl == "true" ? "gcloud container clusters get-credentials ${var.cluster_name} --zone ${var.zone} --project ${var.project}": "" }"
+    command = "${var.auto_register_kubeconfig == "true" ? "gcloud container clusters get-credentials ${var.cluster_name} --zone ${var.zone} --project ${var.project}": "" }"
   }
 }
 

@@ -11,7 +11,7 @@ module "gke" {
   password           = "${var.cluster_master_password}"
   initial_node_count = 2
 
-  is_auth_kubectl = "false"
+  auto_register_kubeconfig = "false"
 }
 
 # module outputは `$ terraform output` で直接見れない　めんどい
