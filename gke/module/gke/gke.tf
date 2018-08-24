@@ -44,5 +44,5 @@ resource "google_compute_firewall" "prometheus" {
     ports    = ["30080"]
   }
 
-  source_tags = "${var.tags}"
+  target_tags = "${var.tags}"
 }
