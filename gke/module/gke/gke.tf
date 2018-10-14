@@ -2,7 +2,9 @@ resource "google_container_cluster" "gke" {
   name               = "${var.cluster_name}"
   zone               = "${var.zone}"
   initial_node_count = "${var.initial_node_count}"
+  min_master_version = "1.10.6-gke.1"
 
+  master_authorized_networks_config = {
   master_auth {
     username = "admin"
     password = "${var.password}"
