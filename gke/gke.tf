@@ -1,10 +1,3 @@
-variable "cluster_name" {
-  default = "terraform-cluster"
-}
-
-variable "cluster_master_password" {}
-variable "auto_register_kubeconfig" {}
-
 module "gke" {
   source = "./module/gke"
   project            = "${var.gcp_project}"
@@ -12,7 +5,12 @@ module "gke" {
   password           = "${var.cluster_master_password}"
   initial_node_count = 2
 
-  auto_register_kubeconfig = "false"
+  # kubectl ip rectriction
+  master_authorized_networks_config = "${var.master_authorized_networks_config}"
+
+  # prometheus settings
+  allow_prometheus_nodeport  = "${var.allow_prometheus_nodeport}"
+  prometheus_allow_networks  = "${var.prometheus_allow_networks}"
 
   # local exec
   auto_register_kubeconfig = "${var.auto_register_kubeconfig}"

@@ -1,2 +1,15 @@
-gcp_project = "dev-playground-1019"
-auto_register_kubeconfig = "true"
+gcp_project = "your_gcp_project"
+
+auto_register_kubeconfig  = "true"
+
+cluster_name              = "awesome-cluster"
+cluster_master_password   = ""
+
+allow_prometheus_nodeport = "false"
+prometheus_allow_networks = [ "0.0.0.0/32" ]
+
+# master_authorized_networks_config = {
+#   cidr_blocks = [
+#     { cidr_block = "0.0.0.0/32", display_name = "prometheus_nodeport_allow_all_client" },
+#   ]
+# }

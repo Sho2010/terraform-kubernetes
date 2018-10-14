@@ -2,9 +2,13 @@ resource "google_container_cluster" "gke" {
   name               = "${var.cluster_name}"
   zone               = "${var.zone}"
   initial_node_count = "${var.initial_node_count}"
-  min_master_version = "1.10.6-gke.1"
+  min_master_version = "1.10.7-gke.6"
 
-  master_authorized_networks_config = {
+  # TODO: var設定時のみ設定する
+  # master_authorized_networks_config = {
+  #   cidr_blocks = "${var.master_authorized_networks_config}"
+  # }
+
   master_auth {
     username = "admin"
     password = "${var.password}"
@@ -13,6 +17,7 @@ resource "google_container_cluster" "gke" {
   node_config {
     machine_type = "${var.machine_type}"
     disk_size_gb = "${var.disk_size_gb}"
+    preemptible  = "true"
 
     oauth_scopes = [
       "https://www.googleapis.com/auth/compute",
@@ -35,15 +40,17 @@ resource "google_container_cluster" "gke" {
 
 # (Optional) Use for prometheus NodePort
 resource "google_compute_firewall" "prometheus" {
+  count  = "${var.allow_prometheus_nodeport == "true" ? 1 : 0 }"
+
   name    = "${var.cluster_name}-prometheus-firewall"
   network = "default" # TODO: other network support
 
   # ip restriction if require
-  source_ranges = [ "0.0.0.0/0" ]
+  source_ranges = "${var.prometheus_allow_networks}"
 
   allow {
     protocol = "tcp"
-    ports    = ["30080"]
+    ports    = ["${var.prometheus_port}"]
   }
 
   target_tags = "${var.tags}"
