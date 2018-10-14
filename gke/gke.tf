@@ -3,6 +3,7 @@ variable "cluster_name" {
 }
 
 variable "cluster_master_password" {}
+variable "auto_register_kubeconfig" {}
 
 module "gke" {
   source = "./module/gke"
@@ -12,6 +13,9 @@ module "gke" {
   initial_node_count = 2
 
   auto_register_kubeconfig = "false"
+
+  # local exec
+  auto_register_kubeconfig = "${var.auto_register_kubeconfig}"
 }
 
 # module outputは `$ terraform output` で直接見れない　めんどい
