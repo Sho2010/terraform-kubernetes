@@ -1,0 +1,10 @@
+        lifecycle:
+          # podを落とす前に、readiness probe によってシャットダウンを検知できる迄の充分な時間を置いてあげる。
+          # こうすることで、terminateが始まったpodに新規リクエストが来ることを防ぐ
+          # see https://github.com/kubernetes/kubernetes/issues/43576
+          preStop:
+            exec:
+              command:
+              - /bin/sh
+              - -c
+              - sleep 10

@@ -1,0 +1,14 @@
+# https://github.com/helm/charts/tree/master/stable/prometheus#configuration
+# `ClusterIP適当に適切なものを入れる`　自動で振る方法がよくわからない
+alertmanager:
+  persistentVolume:
+    enabled: false
+server:
+  retention	: 7d
+  persistentVolume:
+    enabled: false
+  service:
+    clusterIP: "10.51.242.1"
+    type: "NodePort"
+    nodePort: 30080 # terraformで公開したportに合わせること
+

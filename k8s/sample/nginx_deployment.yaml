@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 80
+        # rails sample
+        # command: ["sh", "-c", "exec bundle exec rails s -b 0.0.0.0"]
+        # envFrom:
+        # - configMapRef:
+        #     name: rails-config

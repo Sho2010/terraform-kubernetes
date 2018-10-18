@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    kubernetes.io/ingress.allow-http: "true" # httpsの強制設定ができるおすすめ
+    kubernetes.io/ingress.global-static-ip-name: reserved-ip # GCP上の名前付きの予約IPアドレスを使える
+spec:
+  backend:
+    serviceName: nginx-nodeport
+    servicePort: 80
+#  tls:
+#  - secretName: tls-secret

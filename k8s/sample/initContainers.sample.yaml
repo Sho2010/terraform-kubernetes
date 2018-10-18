@@ -1,0 +1,8 @@
+spec:
+ template:
+    spec:
+      initContainers:
+      - name: init-db
+        image: mysql:5.7
+        command: ['sh', '-c', 'until timeout 1 test $(mysql -h PLEASE_WRITE_HOST -p${DB_PASSWORD} -D DB_NAME -N -s -e "select count(*) from sample_table;" ) -eq 1; do echo waiting for db; sleep 2; done;']
+        # env if require
