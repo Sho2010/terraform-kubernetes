@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rails-common-config
+data:
+  TZ: "Asia/Tokyo"
+  LOGLEVEL:  Information
+  RAILS_ENV: production
+  RAILS_LOG_TO_STDOUT: "true"
+  MASTER_DATA_DIR: "/master"
