@@ -10,3 +10,7 @@ variable "vpc_name" {
   description = "(Required) Name of the VPC."
 }
 
+variable "cluster_name" {
+  description = "(Required) Name of the cluster."
+  default = "sample-cluster"
+}
